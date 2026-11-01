@@ -1,0 +1,90 @@
+---
+layout: runbook
+title: '#4471 reviewed: two causes behind the date reports'
+owner: Wiktor Chojnacki
+status: investigated
+reviewed: 2026-11-01
+signature: 'v1.eyJzdWIiOiI4MTgiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzU0MTU0MSwiZXhwIjoxNzkzNjI3OTQxfQ.--63kxnn7JR4p_1G0T4vnGvxgP9rEGVIGXWLok5v2ds'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## What the desk should act on
+
+The [original incident](/kb/incidents/4471/) says this is one known parser issue. Its rendered
+table and the exported report data show two causes. Keep a ticket for each:
+
+- [Shared month-first parser](https://github.com/wiktor-wiktor/megadev-s01e03-what-it-shows/issues/1):
+  day-first input is interpreted month first. Harbour Dental's R-41200 describes
+  7 April becoming 4 July.
+- [booking-v3 format hint](https://github.com/wiktor-wiktor/megadev-s01e03-what-it-shows/issues/2):
+  the form prints `MM/DD/YYYY` for day-first tenants but interprets input in their local
+  convention. Copper Studio's R-41230 describes 6 January becoming 1 June.
+  Correct the hint and input agreement separately from the shared parser.
+
+The counts below are computed from this export. The supplied export is dated
+4 October 2026; this review does not claim to see the live support queue.
+
+## Count distinct reports, then resolve the tenant
+
+Export pages overlap. Deduplicate by report ID before filtering reports merged into
+the incident. Browser locale and intake tags are guesses, not the tenant's convention.
+Resolve the tenant's locale and booking-form version, then run the exported cause logic.
+The computed table also shows where intake labels disagree with that classification.
+
+<CauseTable ticket={4471} />
+
+The table's “no ticket of its own” message describes the original desk filing.
+The linked GitHub issues above now track both groups.
+
+<Callout kind="warn">
+The classifier is a rule based on tenant and channel, not proof of every report's
+underlying defect. Its footnote flags reports the desk read as a one-day move.
+R-41202 describes a one-day shift; R-41209 says only June is affected;
+R-41236 says an invite arrived before booking; R-41344 compares Lisbon and Toronto;
+R-41620 describes another one-day shift. Keep them visible in the parser-assigned count,
+but verify timestamps, timezone and calendar payloads before claiming they share its cause.
+A timezone defect is a hypothesis, not an established third cause.
+</Callout>
+
+## Arrival is different from merging
+
+The received series starts before the bulk merge into the incident. A merge spike
+records desk activity; it does not mean the reports first arrived then. Later reports
+continue to arrive, so “known” and “fix queued” are not evidence of a resolved incident.
+
+<QueueTimeline ticket={4471} />
+
+## Match causes before merging
+
+The old [triage rule](/kb/triage/dedupe/) and
+[accepted decision](/kb/decisions/0001-dedupe-by-subject/) merge by subject alone.
+Their review dates are stale. The interactive examples below demonstrate that identical
+subjects can describe different causes, and different subjects can share a cause.
+Do not rely on the old prose without checking the rendered evidence.
+
+<DedupeExplorer />
+
+For this investigation, use subject text to find candidates, then confirm tenant,
+form, channel and mechanism before merging. Keep unresolved reports separate for review;
+an unknown tenant is not evidence of a duplicate. Preserve the accepted decision as
+history; the desk should approve a replacement decision before changing its policy.
+
+## Follow-up and verification
+
+Fix and verify each mechanism separately using asymmetric dates and affected tenant
+configurations. Revisit the flagged reports rather than hiding them in a total.
+After the export, obtain fresh data before declaring the queue fixed.
+
+The repository includes the original source, issue descriptions, a repeatable
+analysis in `tools/analyze.mjs`, its output in `evidence/analysis-export.json`,
+and the built page in `build/kb/incidents/4471-review/index.html`.
+Numbers are computed in the components rather than copied into this prose.
+
+<RenderStamp {signature} />
