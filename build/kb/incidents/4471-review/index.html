@@ -5,31 +5,35 @@
 		<link href="../../../_app/immutable/assets/QueueTimeline.hI2H_0Om.css" rel="stylesheet">
 		<link href="../../../_app/immutable/assets/DedupeExplorer.C3mwiGDj.css" rel="stylesheet">
 		<link href="../../../_app/immutable/assets/5.CMZ6TBbc.css" rel="stylesheet">
-		<link rel="modulepreload" href="../../../_app/immutable/entry/start.CIU_jezC.js">
-		<link rel="modulepreload" href="../../../_app/immutable/chunks/BYMBPx4L.js">
+		<link rel="modulepreload" href="../../../_app/immutable/entry/start.C67j2h7t.js">
+		<link rel="modulepreload" href="../../../_app/immutable/chunks/CRmUanh8.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/D3oVMcyu.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/C533tbmZ.js">
-		<link rel="modulepreload" href="../../../_app/immutable/entry/app.CIKFY9lL.js">
+		<link rel="modulepreload" href="../../../_app/immutable/entry/app.ClYoxT9v.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/B9LFxzg5.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/CGrz4PlP.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/Co2DpoZg.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/Du8WZdFY.js">
 		<link rel="modulepreload" href="../../../_app/immutable/nodes/0.PnWJdU3q.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/Bcl21T27.js">
-		<link rel="modulepreload" href="../../../_app/immutable/nodes/5.CS6YeHPk.js">
-		<link rel="modulepreload" href="../../../_app/immutable/chunks/hC3aNX2S.js">
+		<link rel="modulepreload" href="../../../_app/immutable/nodes/5.mTe9iHek.js">
+		<link rel="modulepreload" href="../../../_app/immutable/chunks/CaBGbu4q.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/B8qpCgw5.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/cxyCBJ39.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/CpXiW75G.js">
 		<link rel="modulepreload" href="../../../_app/immutable/chunks/BN7CIvFI.js">
-		<link rel="modulepreload" href="../../../_app/immutable/chunks/Cy6X_ItV.js"><!--e2jw2j--><!----><title>#4471 reviewed: two causes behind the date reports · support kb</title></head><body data-sveltekit-preload-data="hover"><div style="display: contents"><!--[--><!--[--><!----><!----><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 reviewed: two causes behind the date reports</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Wiktor Chojnacki</b></span> <span class="status investigated svelte-e2jw2j">investigated</span> <span class="svelte-e2jw2j">reviewed 2026-11-01 · 0 days ago</span></p></header> <!--[!--><!--]--> <main><h2>What the desk should act on</h2> <p>The <a href="/kb/incidents/4471/">original incident</a> says this is one known parser issue. Its rendered
+		<link rel="modulepreload" href="../../../_app/immutable/chunks/Cy6X_ItV.js"><!--e2jw2j--><!----><title>#4471 reviewed: two causes behind the date reports · support kb</title></head><body data-sveltekit-preload-data="hover"><div style="display: contents"><!--[--><!--[--><!----><!----><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 reviewed: two causes behind the date reports</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Wiktor Chojnacki</b></span> <span class="status closed svelte-e2jw2j">closed</span> <span class="svelte-e2jw2j">reviewed 2026-11-01 · 0 days ago</span></p></header> <!--[!--><!--]--> <main><h2>What the desk should act on</h2> <p>The <a href="/kb/incidents/4471/">original incident</a> says this is one known parser issue. Its rendered
 table and the exported report data show two causes. Keep a ticket for each:</p> <ul><li><a href="https://github.com/wiktor-wiktor/megadev-s01e03-what-it-shows/issues/1" rel="nofollow">Shared month-first parser</a>:
 day-first input is interpreted month first. Harbour Dental’s R-41200 describes
 7 April becoming 4 July.</li> <li><a href="https://github.com/wiktor-wiktor/megadev-s01e03-what-it-shows/issues/2" rel="nofollow">booking-v3 format hint</a>:
 the form prints <code>MM/DD/YYYY</code> for day-first tenants but interprets input in their local
 convention. Copper Studio’s R-41230 describes 6 January becoming 1 June.
 Correct the hint and input agreement separately from the shared parser.</li></ul> <p>The counts below are computed from this export. The supplied export is dated
-4 October 2026; this review does not claim to see the live support queue.</p> <h2>Count distinct reports, then resolve the tenant</h2> <p>Export pages overlap. Deduplicate by report ID before filtering reports merged into
+4 October 2026; this review does not claim to see the live support queue.</p> <h2>Engineering outcome after the export</h2> <p>The <a href="https://hq.mega.dev/challenges/what-it-shows" rel="nofollow">course engineering update</a> reports the incident closed on 5 October 2026:</p> <ul><li>Parser: <strong>fixed</strong>, with commit message `fix(dates): parse dd/mm for eu locales`.
+GitHub issue #1 is closed as completed.</li> <li>Form hint: <strong>won’t fix</strong>, because <strong>booking-v3 was retired</strong>.
+GitHub issue #2 is closed as not planned. Retirement is not a hint correction.</li></ul> <p>This later update supplies the closure outcomes; the exported table below remains a
+historical view. I have not independently tested the production fix. The flagged report
+wording remains uncertain, and the update does not provide individual report verification.</p> <h2>Count distinct reports, then resolve the tenant</h2> <p>Export pages overlap. Deduplicate by report ID before filtering reports merged into
 the incident. Browser locale and intake tags are guesses, not the tenant’s convention.
 Resolve the tenant’s locale and booking-form version, then run the exported cause logic.
 The computed table also shows where intake labels disagree with that classification.</p> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm">#4471</td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm">not this ticket — no ticket of its own</td></tr><!--]--></tbody></table> <!--[--><!--[--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[!--><!--]--><!--]--><!----> <p>The table’s “no ticket of its own” message describes the original desk filing.
@@ -49,22 +53,22 @@ form, channel and mechanism before merging. Keep unresolved reports separate for
 an unknown tenant is not evidence of a duplicate. Preserve the accepted decision as
 history; the desk should approve a replacement decision before changing its policy.</p> <h2>Follow-up and verification</h2> <p>Fix and verify each mechanism separately using asymmetric dates and affected tenant
 configurations. Revisit the flagged reports rather than hiding them in a total.
-After the export, obtain fresh data before declaring the queue fixed.</p> <p>The repository includes the original source, issue descriptions, a repeatable
+For any future report, obtain fresh evidence; these closure outcomes do not establish that every similar symptom has been fixed.</p> <p>The repository includes the original source, issue descriptions, a repeatable
 analysis in <code>tools/analyze.mjs</code>, its output in <code>evidence/analysis-export.json</code>,
 and the built page in <code>build/kb/incidents/4471-review/index.html</code>.
 Numbers are computed in the components rather than copied into this prose.</p> <!--[--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-W521-5CRQ</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_r6lo3j = {
+					__sveltekit_bwnri2 = {
 						base: new URL("../../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../../_app/immutable/entry/start.CIU_jezC.js"),
-						import("../../../_app/immutable/entry/app.CIKFY9lL.js")
+						import("../../../_app/immutable/entry/start.C67j2h7t.js"),
+						import("../../../_app/immutable/entry/app.ClYoxT9v.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],

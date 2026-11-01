@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 reviewed: two causes behind the date reports'
 owner: Wiktor Chojnacki
-status: investigated
+status: closed
 reviewed: 2026-11-01
 signature: 'v1.eyJzdWIiOiI4MTgiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzU0MTU0MSwiZXhwIjoxNzkzNjI3OTQxfQ.--63kxnn7JR4p_1G0T4vnGvxgP9rEGVIGXWLok5v2ds'
 ---
@@ -30,6 +30,20 @@ table and the exported report data show two causes. Keep a ticket for each:
 
 The counts below are computed from this export. The supplied export is dated
 4 October 2026; this review does not claim to see the live support queue.
+
+## Engineering outcome after the export
+
+The [course engineering update](https://hq.mega.dev/challenges/what-it-shows)
+reports the incident closed on 5 October 2026:
+
+- Parser: **fixed**, with commit message \`fix(dates): parse dd/mm for eu locales\`.
+  GitHub issue #1 is closed as completed.
+- Form hint: **won’t fix**, because **booking-v3 was retired**.
+  GitHub issue #2 is closed as not planned. Retirement is not a hint correction.
+
+This later update supplies the closure outcomes; the exported table below remains a
+historical view. I have not independently tested the production fix. The flagged report
+wording remains uncertain, and the update does not provide individual report verification.
 
 ## Count distinct reports, then resolve the tenant
 
@@ -80,7 +94,7 @@ history; the desk should approve a replacement decision before changing its poli
 
 Fix and verify each mechanism separately using asymmetric dates and affected tenant
 configurations. Revisit the flagged reports rather than hiding them in a total.
-After the export, obtain fresh data before declaring the queue fixed.
+For any future report, obtain fresh evidence; these closure outcomes do not establish that every similar symptom has been fixed.
 
 The repository includes the original source, issue descriptions, a repeatable
 analysis in `tools/analyze.mjs`, its output in `evidence/analysis-export.json`,
